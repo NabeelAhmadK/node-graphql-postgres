@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "node_api",
+    "host": "localhost",
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+    }
+  },
+  "test": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "node_api",
+    "host": "192.168.0.116",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "node_api",
+    "host": "192.168.0.116",
+    "dialect": "postgres"
+  }
+}
