@@ -3,38 +3,26 @@ const dbConnection = require("../../dbconfig");
 DButils.initDB(dbConnection);
 const Employee = require("../../model/").model.Employee;
 const logger = require("../../utils/logger");
+const employeeFunctions = require("../mw-dal").EmployeeFunctions;
+const dataUtils = require("../core-utils").DataUtils;
+
 const getEmployees = async (req, res) => {
   let tranx;
+
   try {
     tranx = await DButils.beginTransaction();
-    
-    let obj = {};
-    let totalCount = null;
-    let model = Employee.query(tranx);
-    obj.count = totalCount;
-    totalCount = await model.clone().count();
-    obj.count = totalCount[0]['count'];
-    console.log(model);
-    // if (('pageNum' in options.pagging) && ('pageSize' in options.pagging)) {
-    //     totalCount = await model.clone().count();
-    //     obj.count = totalCount[0]['count'];
-    //     let offset = DataUtils.setOffset(options.pagging.pageNum, options.pagging.pageSize);
-    //     model.offset(offset).limit(options.pagging.pageSize);
-    // }
-    model.orderBy("mod_date", "DESC");
 
-    let data = await model.clone().select();
-    logger.info(
-      "<========= Query for get Carrier listing =========> ",
-      model.clone().select()
-    );
+    let options = {
+      tranx: tranx,
+      pagging: {}
+    };
 
+    let response = await employeeFunctions.getEmployeeListings(options);
 
-    obj.data = data;
-
-    console.log(obj);
+    response = dataUtils.formatPage(response.data, true, null, null, null, response.count);
     tranx.commit();
-    res.status(200).send(obj);
+
+    res.status(200).send(response);
   } catch (err) {
     console.log(err);
     tranx.rollback();
