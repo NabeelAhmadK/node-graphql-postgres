@@ -6,8 +6,8 @@ let routes = {
     auth: {
       basePath: basePath + "/login"
     },
-    user: {
-      basePath: basePath + "/users",
+    employee: {
+      basePath: basePath + "/employee",
       usersId: basePath + "/user/:userId",
       dietData: basePath + "/user/:patientId/diet",
       appointment: basePath + "/patient/appointment/make"

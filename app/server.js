@@ -26,7 +26,6 @@ if (app.get("env") === "development") {
     });
   });
 }
-app.use(bodyParser.json({ type: "application/json" }));
 
 require("./routes/routes")(app);
 app.get("*", (req, res) =>
