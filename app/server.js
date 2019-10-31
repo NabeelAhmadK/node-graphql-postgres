@@ -9,16 +9,21 @@ var cors = require("cors");
 const app = express();
 
 logger.debug("Overriding 'Express' logger");
-app.use(require("morgan")({ stream: logger.stream }));
+app.use(require("morgan")({
+  stream: logger.stream
+}));
 
 app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.set("port", port);
 
 if (app.get("env") === "development") {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render("error", {
       message: err.message,

@@ -11,4 +11,9 @@ module.exports = app => {
     paths.apiEndPoints.employee.basePath,
     employeeController.getEmployess
   );
+
+  app.get(
+    paths.apiEndPoints.employee.employeeId,
+    employeeController.getEmployeebyId
+  );
 };

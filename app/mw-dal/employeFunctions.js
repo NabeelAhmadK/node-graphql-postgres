@@ -33,7 +33,19 @@ const getEmployeeListings = async options => {
   }
 };
 
+const getEmployeebyId = async (options) => {
+  try {
+    const employeeResp = await Employee.query(options.tranx).findById(options.params.employeeId);
+    logger.info('<========= Query for get Employee By Id =========> ', Employee.query(options.tranx).findById(options.params.employeeId).toString());
+    return employeeResp;
+  } catch (err) {
+    logger.info('error while executing get Employee By Id operation', err);
+    throw err;
+  }
+}
+
 const EmployeeFunctionUtils = {};
 EmployeeFunctionUtils.getEmployeeListings = getEmployeeListings;
+EmployeeFunctionUtils.getEmployeebyId = getEmployeebyId;
 
 module.exports = EmployeeFunctionUtils;

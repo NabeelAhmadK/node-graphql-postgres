@@ -8,11 +8,13 @@ let routes = {
     },
     employee: {
       basePath: basePath + "/employee",
-      usersId: basePath + "/user/:userId",
+      employeeId: basePath + "/employee/:employeeId",
       dietData: basePath + "/user/:patientId/diet",
       appointment: basePath + "/patient/appointment/make"
     }
   }
 };
 
-module.exports = { routes };
+module.exports = {
+  routes
+};

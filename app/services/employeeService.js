@@ -30,7 +30,34 @@ const getEmployees = async (req, res) => {
   }
 };
 
+const getEmployeebyId = async (req, res) => {
+  let tranx;
+
+  try {
+
+
+    tranx = await DButils.beginTransaction();
+
+    let options = {
+      tranx: tranx,
+      params: req.params
+    };
+
+    let response = await employeeFunctions.getEmployeebyId(options);
+
+    response = dataUtils.formatRespForNoDataAndArray(response)
+    tranx.commit();
+
+    res.status(200).send(response);
+  } catch (err) {
+    console.log(err);
+    tranx.rollback();
+    res.status(500).send(err);
+  }
+}
+
 const employeeService = {};
 employeeService.getEmployees = getEmployees;
+employeeService.getEmployeebyId = getEmployeebyId;
 
 module.exports = employeeService;

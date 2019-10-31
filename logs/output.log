@@ -19,3 +19,92 @@
 2019-10-30T13:36:51.481Z - [32minfo[39m: <********** /db query **********>
 2019-10-30T13:36:51.488Z - [32minfo[39m: ::1 - - [Wed, 30 Oct 2019 13:36:51 GMT] "GET /employee/api/v1/employee HTTP/1.1" 200 1401 "-" "PostmanRuntime/7.6.0"
 
+2019-10-31T05:01:58.262Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T05:06:14.803Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T05:06:32.262Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T05:06:41.288Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T05:07:15.348Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T05:07:39.625Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T05:07:43.651Z - [32minfo[39m: <********** db query **********>
+2019-10-31T05:07:43.653Z - [32minfo[39m: SQL: [BEGIN;]
+2019-10-31T05:07:43.653Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T05:07:43.657Z - [32minfo[39m: <================ Transaction Started ================>
+2019-10-31T05:07:43.671Z - [32minfo[39m: <********** db query **********>
+2019-10-31T05:07:43.672Z - [32minfo[39m: query Uid: [564bafc4-4d64-4542-9195-b0c662b22a7a]
+2019-10-31T05:07:43.673Z - [32minfo[39m: SQL: [select count(*) from "emp"."employee"]
+2019-10-31T05:07:43.674Z - [32minfo[39m: Bindings: []
+2019-10-31T05:07:43.674Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T05:07:43.687Z - [32minfo[39m: <********** db query **********>
+2019-10-31T05:07:43.688Z - [32minfo[39m: query Uid: [df8086db-00e4-468a-a112-222055431e31]
+2019-10-31T05:07:43.689Z - [32minfo[39m: SQL: [select "emp"."employee".* from "emp"."employee" order by "mod_date" DESC]
+2019-10-31T05:07:43.690Z - [32minfo[39m: Bindings: []
+2019-10-31T05:07:43.691Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T05:07:43.697Z - [32minfo[39m: <========= Query for get Carrier listing =========> 
+2019-10-31T05:07:43.699Z - [32minfo[39m: <********** db query **********>
+2019-10-31T05:07:43.699Z - [32minfo[39m: SQL: [COMMIT;]
+2019-10-31T05:07:43.700Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T05:07:43.709Z - [32minfo[39m: ::1 - - [Thu, 31 Oct 2019 05:07:43 GMT] "GET /employee/api/v1/employee HTTP/1.1" 200 1401 "-" "PostmanRuntime/7.6.0"
+
+2019-10-31T05:08:24.719Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T05:09:33.470Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T06:43:17.445Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T06:57:03.941Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T06:57:24.686Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T06:57:28.717Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:57:28.720Z - [32minfo[39m: SQL: [BEGIN;]
+2019-10-31T06:57:28.721Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:57:28.725Z - [32minfo[39m: <================ Transaction Started ================>
+2019-10-31T06:57:28.727Z - [32minfo[39m: error while executing get Employee By Id operation message=Cannot read property 'employeeId' of undefined, stack=TypeError: Cannot read property 'employeeId' of undefined
+    at Object.getEmployeebyId (D:/work/NodeJs-GraphQl-React/emp_api/app/mw-dal/employeFunctions.js:38:85)
+    at Object.getEmployeebyId (D:/work/NodeJs-GraphQl-React/emp_api/app/services/employeeService.js:46:44)
+2019-10-31T06:57:28.754Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:57:28.755Z - [32minfo[39m: SQL: [ROLLBACK]
+2019-10-31T06:57:28.756Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:57:28.763Z - [32minfo[39m: ::1 - - [Thu, 31 Oct 2019 06:57:28 GMT] "GET /employee/api/v1/employee/1 HTTP/1.1" 500 2 "-" "PostmanRuntime/7.6.0"
+
+2019-10-31T06:58:12.560Z - [32minfo[39m: <=========== POOL INITIALIZED ============>
+2019-10-31T06:58:19.461Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:19.463Z - [32minfo[39m: SQL: [BEGIN;]
+2019-10-31T06:58:19.464Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:19.468Z - [32minfo[39m: <================ Transaction Started ================>
+2019-10-31T06:58:19.483Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:19.484Z - [32minfo[39m: query Uid: [f28826dc-2e1b-4af1-836d-87a35d336746]
+2019-10-31T06:58:19.485Z - [32minfo[39m: SQL: [select "emp"."employee".* from "emp"."employee" where "emp"."employee"."employee_id" = ?]
+2019-10-31T06:58:19.486Z - [32minfo[39m: Bindings: [1]
+2019-10-31T06:58:19.487Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:19.496Z - [32minfo[39m: <========= Query for get Employee By Id =========>  select "emp"."employee".* from "emp"."employee" where "emp"."employee"."employee_id" = '1'
+2019-10-31T06:58:19.497Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:19.498Z - [32minfo[39m: SQL: [COMMIT;]
+2019-10-31T06:58:19.499Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:19.506Z - [32minfo[39m: ::1 - - [Thu, 31 Oct 2019 06:58:19 GMT] "GET /employee/api/v1/employee/1 HTTP/1.1" 200 16 "-" "PostmanRuntime/7.6.0"
+
+2019-10-31T06:58:26.972Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:26.973Z - [32minfo[39m: SQL: [BEGIN;]
+2019-10-31T06:58:26.973Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:26.976Z - [32minfo[39m: <================ Transaction Started ================>
+2019-10-31T06:58:26.977Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:26.978Z - [32minfo[39m: query Uid: [59b703c9-88ab-4ef9-8628-cd27f61bab86]
+2019-10-31T06:58:26.979Z - [32minfo[39m: SQL: [select "emp"."employee".* from "emp"."employee" where "emp"."employee"."employee_id" = ?]
+2019-10-31T06:58:26.980Z - [32minfo[39m: Bindings: [2]
+2019-10-31T06:58:26.981Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:26.988Z - [32minfo[39m: <========= Query for get Employee By Id =========>  select "emp"."employee".* from "emp"."employee" where "emp"."employee"."employee_id" = '2'
+2019-10-31T06:58:26.989Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:26.990Z - [32minfo[39m: SQL: [COMMIT;]
+2019-10-31T06:58:26.991Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:26.992Z - [32minfo[39m: ::1 - - [Thu, 31 Oct 2019 06:58:26 GMT] "GET /employee/api/v1/employee/2 HTTP/1.1" 200 661 "-" "PostmanRuntime/7.6.0"
+
+2019-10-31T06:58:32.301Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:32.302Z - [32minfo[39m: SQL: [BEGIN;]
+2019-10-31T06:58:32.302Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:32.305Z - [32minfo[39m: <================ Transaction Started ================>
+2019-10-31T06:58:32.310Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:32.310Z - [32minfo[39m: query Uid: [6be633f7-2d3e-4a3f-9643-760afd1a17ef]
+2019-10-31T06:58:32.311Z - [32minfo[39m: SQL: [select "emp"."employee".* from "emp"."employee" where "emp"."employee"."employee_id" = ?]
+2019-10-31T06:58:32.339Z - [32minfo[39m: Bindings: [3]
+2019-10-31T06:58:32.341Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:32.345Z - [32minfo[39m: <========= Query for get Employee By Id =========>  select "emp"."employee".* from "emp"."employee" where "emp"."employee"."employee_id" = '3'
+2019-10-31T06:58:32.350Z - [32minfo[39m: <********** db query **********>
+2019-10-31T06:58:32.351Z - [32minfo[39m: SQL: [COMMIT;]
+2019-10-31T06:58:32.352Z - [32minfo[39m: <********** /db query **********>
+2019-10-31T06:58:32.354Z - [32minfo[39m: ::1 - - [Thu, 31 Oct 2019 06:58:32 GMT] "GET /employee/api/v1/employee/3 HTTP/1.1" 200 659 "-" "PostmanRuntime/7.6.0"
+
