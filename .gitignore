@@ -65,3 +65,5 @@ typings/
 objection-alpha-template
 
 logs/*
+
+package-lock.json

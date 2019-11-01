@@ -1,4 +1,4 @@
-const employeeService = require("../services");
+const employeeService = require("../services").employeeService;
 const employeeController = {};
 
 employeeController.getEmployess = (req, res) => {

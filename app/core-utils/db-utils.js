@@ -2,7 +2,7 @@
 const { Model } = require("objection");
 const Knex = require("knex");
 const LOG_CATEGORY = "POSTGRES-UTILS";
-var logger = require("../../utils/logger");
+var logger = require("../../logger/logger");
 const models = require("../../model/");
 const DBUtils = {};
 let knexObj;

@@ -1,5 +1,5 @@
 const Employee = require("../../model/").model.Employee;
-const logger = require("../../utils/logger");
+const logger = require("../../logger/logger");
 
 const getEmployeeListings = async options => {
   try {

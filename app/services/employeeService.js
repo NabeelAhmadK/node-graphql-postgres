@@ -1,10 +1,9 @@
 const DButils = require("../core-utils/db-utils").DBUtils;
-const dbConnection = require("../../dbconfig");
-DButils.initDB(dbConnection);
 const Employee = require("../../model/").model.Employee;
-const logger = require("../../utils/logger");
+const logger = require("../../logger/logger");
 const employeeFunctions = require("../mw-dal").EmployeeFunctions;
 const dataUtils = require("../core-utils").DataUtils;
+
 
 const getEmployees = async (req, res) => {
   let tranx;
@@ -34,7 +33,6 @@ const getEmployeebyId = async (req, res) => {
   let tranx;
 
   try {
-
 
     tranx = await DButils.beginTransaction();
 

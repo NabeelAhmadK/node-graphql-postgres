@@ -1,13 +1,16 @@
 const express = require("express");
-// const logger = require('morgan');
-const logger = require("../utils/logger");
+const logger = require("../logger/logger");
 const http = require("http");
-
+const redis = require('redis');
 const bodyParser = require("body-parser");
 var cors = require("cors");
+const DButils = require("./core-utils/db-utils").DBUtils;
+const dbConnection = require("../dbconfig");
+const helmet = require('helmet');
+DButils.initDB(dbConnection);
 
 const app = express();
-
+app.use(helmet())
 logger.debug("Overriding 'Express' logger");
 app.use(require("morgan")({
   stream: logger.stream
@@ -15,11 +18,9 @@ app.use(require("morgan")({
 
 app.use(cors());
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.json());
 
-const port = parseInt(process.env.PORT, 10) || 8000;
+const port = parseInt(process.env.PORT, 10) || 8001;
 app.set("port", port);
 
 if (app.get("env") === "development") {
@@ -32,10 +33,11 @@ if (app.get("env") === "development") {
   });
 }
 
-require("./routes/routes")(app);
+require("./routes/middleware")(app);
+
 app.get("*", (req, res) =>
   res.status(200).send({
-    message: "Welcome to the beginning of nothingness."
+    message: "Unauthorized"
   })
 );
 

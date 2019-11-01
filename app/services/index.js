@@ -1,3 +1,2 @@
-const employeeService = require("./employeeService");
-
-module.exports = employeeService;
+module.exports.employeeService = require("./employeeService");
+module.exports.loginService = require('./loginService');

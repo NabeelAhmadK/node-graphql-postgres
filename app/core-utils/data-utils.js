@@ -1,4 +1,4 @@
-const logger = require("../../utils/logger");
+const logger = require("../../logger/logger");
 
 var randtoken = require("rand-token");
 var Long = require("long");
