@@ -24,7 +24,7 @@
     "eslint-plugin-react": "^3.12.0"
   },
   "dependencies": {
-    "apollo-server-express": "^2.9.7",
+    "@phc/pbkdf2": "^1.1.14",
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -32,25 +32,22 @@
     "crypto": "^1.0.1",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
-    "graphql": "^14.5.8",
-    "graphql-tools": "^4.0.6",
     "helmet": "^3.21.2",
     "is-email": "^1.0.0",
     "is-uuid": "^1.0.2",
     "knex": "^0.20.1",
     "lodash": "^4.13.1",
-    "merge-graphql-schemas": "^1.4.0",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "objection": "^1.6.11",
     "objection-db-errors": "^1.1.1",
     "pg": "^6.4.2",
-    "rand-token": "^0.2.1",
+    "rand-token": "^0.4.0",
     "redis": "^2.8.0",
     "request-promise": "^3.0.0",
     "shape-errors": "^1.2.0",
     "tabel": "^1.6.1",
+    "upash": "^1.0.2",
     "winston": "^2.3.1"
   }
 }

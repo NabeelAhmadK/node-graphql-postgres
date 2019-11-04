@@ -1,16 +1,17 @@
 const logger = require("../../logger/logger");
 
 var randtoken = require("rand-token");
-var Long = require("long");
 var util = require("util");
 var fs = require("fs");
 var moment = require("moment");
+const upash = require('upash');
+upash.install('pbkdf2', require('@phc/pbkdf2'));
 
 var DataUtils = {};
 
 module.exports.DataUtils = DataUtils;
 
-DataUtils.generateToken = function(chunkCount, chunkLen) {
+DataUtils.generateToken = function (chunkCount, chunkLen) {
   var token = "";
 
   for (var count = 0; count < chunkCount; count++) {
@@ -22,7 +23,7 @@ DataUtils.generateToken = function(chunkCount, chunkLen) {
 
 var seqNumCounter = 0;
 
-DataUtils.genSeqNum = function(workerId, numToAppend) {
+DataUtils.genSeqNum = function (workerId, numToAppend) {
   var seqNum = new Date().getTime();
 
   if (workerId != undefined && !isNaN(workerId)) seqNum += workerId;
@@ -35,11 +36,11 @@ DataUtils.genSeqNum = function(workerId, numToAppend) {
   return seqNum;
 };
 
-DataUtils.genMsgId = function(workerId, numToAppend) {
+DataUtils.genMsgId = function (workerId, numToAppend) {
   return DataUtils.genSeqNum(workerId, numToAppend);
 };
 
-DataUtils.nomalizeToParam = function(queryParams) {
+DataUtils.nomalizeToParam = function (queryParams) {
   var toList;
 
   if (queryParams.to instanceof Array) {
@@ -59,7 +60,7 @@ DataUtils.nomalizeToParam = function(queryParams) {
   }
 };
 
-DataUtils.objectKeysToLowerCase = function(obj) {
+DataUtils.objectKeysToLowerCase = function (obj) {
   for (var key in obj) {
     var _key = key.toLowerCase();
 
@@ -75,7 +76,7 @@ DataUtils.objectKeysToLowerCase = function(obj) {
   }
 };
 
-DataUtils.getArrayDistinctItems = function(itemsArray) {
+DataUtils.getArrayDistinctItems = function (itemsArray) {
   var distinctItems = {};
 
   for (var index = 0; index < itemsArray.length; index++) {
@@ -85,18 +86,18 @@ DataUtils.getArrayDistinctItems = function(itemsArray) {
     }
   }
 
-  return Object.keys(distinctItems).map(function(key) {
+  return Object.keys(distinctItems).map(function (key) {
     return distinctItems[key];
   });
 };
 
-DataUtils.getRandomIntInclusive = function(min, max) {
+DataUtils.getRandomIntInclusive = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 };
 
-DataUtils.printException = function(logger, err) {
+DataUtils.printException = function (logger, err) {
   if (err) {
     if (err.stack) logger.error("stack-trace: " + err.stack);
 
@@ -112,13 +113,13 @@ DataUtils.printException = function(logger, err) {
   }
 };
 
-DataUtils.printObjValue = function(logger, value) {
+DataUtils.printObjValue = function (logger, value) {
   logger.debug("---------------------");
   logger.debug(value);
   logger.debug("---------------------");
 };
 
-DataUtils.handleException = function(logger, err) {
+DataUtils.handleException = function (logger, err) {
   var errRespObj = {};
 
   if (err) {
@@ -140,7 +141,7 @@ DataUtils.handleException = function(logger, err) {
   return errRespObj;
 };
 
-DataUtils.formatPage = function(
+DataUtils.formatPage = function (
   records,
   addMetaData,
   pageNum,
@@ -157,7 +158,9 @@ DataUtils.formatPage = function(
     _pageNum = parseInt(_pageNum);
     _pageSize = parseInt(_pageSize);
     var listings;
-    var respObj = { statusCode: 0 };
+    var respObj = {
+      statusCode: 0
+    };
 
     if (arguments.length < 6) {
       metadata.totalPages = Math.ceil(records.length / _pageSize);
@@ -188,7 +191,9 @@ DataUtils.formatPage = function(
     }
     return respObj;
   } else {
-    var respObj = { statusCode: 0 };
+    var respObj = {
+      statusCode: 0
+    };
 
     if (header) {
       for (var key in header) {
@@ -202,7 +207,7 @@ DataUtils.formatPage = function(
   }
 };
 
-DataUtils.paginate = function(page, itemsPerPage) {
+DataUtils.paginate = function (page, itemsPerPage) {
   let offset = (page - 1) * itemsPerPage;
   let limit = itemsPerPage;
   pageObj = {
@@ -212,8 +217,11 @@ DataUtils.paginate = function(page, itemsPerPage) {
   return pageObj;
 };
 
-DataUtils.formatResp = function(data) {
-  var responeObj = { statusCode: 0, id: "" };
+DataUtils.formatResp = function (data) {
+  var responeObj = {
+    statusCode: 0,
+    id: ""
+  };
 
   for (var key in data) {
     responeObj[key] = data[key];
@@ -223,8 +231,10 @@ DataUtils.formatResp = function(data) {
 
   return responeObj;
 };
-DataUtils.formatRespForNoDataAndArray = function(data) {
-  var responeObj = { statusCode: 0 };
+DataUtils.formatRespForNoDataAndArray = function (data) {
+  var responeObj = {
+    statusCode: 0
+  };
   var responseData;
 
   if (util.isArray(data) && data.length > 0) responseData = data[0];
@@ -237,7 +247,7 @@ DataUtils.formatRespForNoDataAndArray = function(data) {
   return responeObj;
 };
 
-DataUtils.formatUserName = function(name) {
+DataUtils.formatUserName = function (name) {
   var _name = "";
 
   if (name && name.firstName) {
@@ -247,7 +257,7 @@ DataUtils.formatUserName = function(name) {
   return _name;
 };
 
-DataUtils.selectRandomArrayChunk = function(array) {
+DataUtils.selectRandomArrayChunk = function (array) {
   var middleElement = parseInt(array.length);
 
   var startElement = parseInt(Math.random() * middleElement + 1);
@@ -255,7 +265,7 @@ DataUtils.selectRandomArrayChunk = function(array) {
   return array.slice(startElement, startElement * 2);
 };
 
-DataUtils.filterByStringParam = function(array, paramName, paramVal) {
+DataUtils.filterByStringParam = function (array, paramName, paramVal) {
   var response = [];
 
   for (var index = 0; index < array.length; index++) {
@@ -267,7 +277,7 @@ DataUtils.filterByStringParam = function(array, paramName, paramVal) {
   return response;
 };
 
-DataUtils.filterByIntParam = function(array, paramSelect, paramVal, cmpType) {
+DataUtils.filterByIntParam = function (array, paramSelect, paramVal, cmpType) {
   var response = [];
 
   for (var index = 0; index < array.length; index++) {
@@ -297,7 +307,7 @@ DataUtils.filterByIntParam = function(array, paramSelect, paramVal, cmpType) {
   return response;
 };
 
-DataUtils.createSocialUser = function(user) {
+DataUtils.createSocialUser = function (user) {
   var _user = {
     lastName: "string",
     name: "string",
@@ -318,7 +328,7 @@ DataUtils.createSocialUser = function(user) {
   return _user;
 };
 
-DataUtils.createSocialCompany = function(company) {
+DataUtils.createSocialCompany = function (company) {
   var _company = {
     name: "string",
     description: "string"
@@ -330,22 +340,22 @@ DataUtils.createSocialCompany = function(company) {
   return _company;
 };
 
-DataUtils.createGWId = function(clientId, origIP) {
+DataUtils.createGWId = function (clientId, origIP) {
   return (
     "RT" + ("00000000" + clientId).slice(-8) + "-" + DataUtils.ipToHex(origIP)
   );
 };
 
-DataUtils.JSON_stringify = function(s, emit_unicode) {
+DataUtils.JSON_stringify = function (s, emit_unicode) {
   var json = JSON.stringify(s);
-  return emit_unicode
-    ? json
-    : json.replace(/[\u007f-\uffff]/g, function(c) {
-        return "\\u" + ("0000" + c.charCodeAt(0).toString(16)).slice(-4);
-      });
+  return emit_unicode ?
+    json :
+    json.replace(/[\u007f-\uffff]/g, function (c) {
+      return "\\u" + ("0000" + c.charCodeAt(0).toString(16)).slice(-4);
+    });
 };
 
-DataUtils.createTermTG = function(rateCardData) {
+DataUtils.createTermTG = function (rateCardData) {
   return (
     rateCardData.platformId +
     rateCardData.rateCard +
@@ -355,7 +365,7 @@ DataUtils.createTermTG = function(rateCardData) {
   );
 };
 
-DataUtils.extractIPV4 = function(address) {
+DataUtils.extractIPV4 = function (address) {
   var prefix = "::ffff:";
   if (address.indexOf(prefix) >= 0) {
     return address.substr(prefix.length);
@@ -364,7 +374,7 @@ DataUtils.extractIPV4 = function(address) {
   }
 };
 
-DataUtils.unixTimestampToDateString = function(unixTimestamp, dateFormat) {
+DataUtils.unixTimestampToDateString = function (unixTimestamp, dateFormat) {
   if (unixTimestamp) {
     let rDate = moment(unixTimestamp).format(dateFormat);
     logger.info("dateToUnixTimestamp [%s] to [%s]", unixTimestamp, rDate);
@@ -373,7 +383,7 @@ DataUtils.unixTimestampToDateString = function(unixTimestamp, dateFormat) {
   return "";
 };
 
-DataUtils.dateToUnixTimestamp = function(dateToConvert, dateFormat) {
+DataUtils.dateToUnixTimestamp = function (dateToConvert, dateFormat) {
   if (dateToConvert) {
     let rDate = moment(dateToConvert, dateFormat).valueOf();
     logger.info("dateToUnixTimestamp [%s] to [%s]", dateToConvert, rDate);
@@ -381,6 +391,7 @@ DataUtils.dateToUnixTimestamp = function(dateToConvert, dateFormat) {
   }
   return "";
 };
+
 function getArrayElement(array, index, splitBy, subIndex, defaultVal) {
   var element = "";
   if (array[index]) {
@@ -397,7 +408,7 @@ function getArrayElement(array, index, splitBy, subIndex, defaultVal) {
   return element;
 }
 
-DataUtils.parseDlvryMsg = function(message, dataCoding, msgIdFormat) {
+DataUtils.parseDlvryMsg = function (message, dataCoding, msgIdFormat) {
   var dlvryMsg = {};
 
   if (message && dataCoding == 0) {
@@ -447,83 +458,7 @@ function convertDlvDate(dateStr) {
   return date;
 }
 
-function applyMsgConvRules(rcvdMsgId, msgIdFormat) {
-  var msgId;
-
-  if (!msgIdFormat || msgIdFormat.length == 0) {
-    if (!isNaN(rcvdMsgId)) {
-      var longId = Long.fromString(rcvdMsgId, true, 10);
-      if (longId.toString() == rcvdMsgId) {
-        msgId = longId.toString(16).toUpperCase();
-      } else {
-        msgId = rcvdMsgId;
-      }
-    } else {
-      msgId = rcvdMsgId;
-    }
-  } else {
-    var rules = msgIdFormat.split(":");
-    var type = rules[0].toLowerCase();
-    var maxLen = rules[1];
-    var padding = rules[2];
-    var strCase = rules[3];
-
-    if (type == "hex") {
-      var longId = Long.fromString(rcvdMsgId, true, 10);
-      var hexStr = longId.toString(16);
-
-      if (maxLen && maxLen.length > 0) {
-        var length = parseInt(maxLen);
-
-        if (!padding || padding.length == 0) {
-          padding = "0";
-        }
-
-        msgId = (padding.repeat(length) + hexStr).slice(-1 * length);
-      } else {
-        msgId = hexStr;
-      }
-
-      if (strCase && strCase.length > 0) {
-        strCase = strCase.toLowerCase();
-        if (strCase == "upper") {
-          msgId = msgId.toUpperCase();
-        } else if (strCase == "lower") {
-          msgId = msgId.toLowerCase();
-        }
-      } else {
-        msgId = msgId.toUpperCase();
-      }
-    } else if (type == "string") {
-      if (maxLen && maxLen.length > 0) {
-        var length = parseInt(maxLen);
-
-        if (!padding || padding.length == 0) {
-          padding = "0";
-        }
-
-        msgId = (padding.repeat(length) + rcvdMsgId).slice(-1 * length);
-      } else {
-        msgId = rcvdMsgId;
-      }
-
-      if (strCase && strCase.length > 0) {
-        strCase = strCase.toLowerCase();
-        if (strCase == "upper") {
-          msgId = msgId.toUpperCase();
-        } else if (strCase == "lower") {
-          msgId = msgId.toLowerCase();
-        }
-      }
-    } else {
-      msgId = rcvdMsgId;
-    }
-  }
-
-  return msgId;
-}
-
-DataUtils.convertToUnixTimestamp = function(strTimestamp) {
+DataUtils.convertToUnixTimestamp = function (strTimestamp) {
   let uTimestamp = 0;
   if (strTimestamp) {
     uTimestamp = new Date(strTimestamp).getTime();
@@ -532,7 +467,7 @@ DataUtils.convertToUnixTimestamp = function(strTimestamp) {
   return uTimestamp;
 };
 
-DataUtils.calculateBalance = function(acctData) {
+DataUtils.calculateBalance = function (acctData) {
   return (
     acctData.totalGrossProfit +
     acctData.totalCredit +
@@ -543,7 +478,7 @@ DataUtils.calculateBalance = function(acctData) {
   );
 };
 
-DataUtils.getAcctTemplate = function() {
+DataUtils.getAcctTemplate = function () {
   return {
     totalCredit: 0,
     totalPayment: 0,
@@ -557,3 +492,11 @@ DataUtils.getAcctTemplate = function() {
     totalPayable: 0
   };
 };
+
+DataUtils.generateHash = function (password) {
+  return upash.use('pbkdf2').hash(password);
+}
+
+DataUtils.validateHash = function (hash, password) {
+  return upash.verify(hash, password);
+}

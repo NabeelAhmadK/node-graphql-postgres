@@ -23,7 +23,6 @@ const getEmployees = async (req, res) => {
 
     res.status(200).send(response);
   } catch (err) {
-    console.log(err);
     tranx.rollback();
     res.status(500).send(err);
   }
@@ -48,7 +47,6 @@ const getEmployeebyId = async (req, res) => {
 
     res.status(200).send(response);
   } catch (err) {
-    console.log(err);
     tranx.rollback();
     res.status(500).send(err);
   }

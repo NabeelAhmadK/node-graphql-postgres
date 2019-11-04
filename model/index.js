@@ -15,7 +15,9 @@ let initialized = false;
 /*----------Override DB Errors--------*/
 /*------------------------------------*/
 
-const { DbErrors } = require("objection-db-errors");
+const {
+  DbErrors
+} = require("objection-db-errors");
 
 class BaseModel extends DbErrors(objection.Model) {
   $beforeUpdate() {
@@ -44,6 +46,7 @@ function init(knex, customModel) {
   /* eslint-disable global-require */
   // Import model files and assign them to `model` object.
   model.Employee = require("./definition/employee.js");
+  model.User = require('./definition/user.js');
 }
 
 /** objection.Model or subclass of it. */

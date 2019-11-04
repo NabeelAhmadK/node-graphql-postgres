@@ -75,7 +75,6 @@ async function startTransaction() {
 
 async function beginTransaction() {
   try {
-    console.log("asdasdasdasd", knexObj);
     const client = await transaction.start(knexObj);
     logger.info("<================ Transaction Started ================>");
     return client;

@@ -6,11 +6,11 @@ const {
 /* eslint-disable require-jsdoc, max-len */
 
 /**
- * emp.employee
+ * emp.user
  * 
- * @param {string}               employee_code        - 
- * @param {string}               employee_name        - 
- * @param {string}               employee_password    - 
+ * @param {string}               [user_code]          - 
+ * @param {string}               [user_name]          - 
+ * @param {string}               [user_password]      - 
  * @param {string}               [title]              - 
  * @param {string}               [first_name]         - 
  * @param {string}               [middle_name]        - 
@@ -21,9 +21,9 @@ const {
  * @param {string}               [corporate_email]    - 
  * @param {string}               [personal_email]     - 
  * @param {string}               [bio_description]    - 
- * @param {string}               employee_status_id   - 
- * @param {string}               employee_type_id     - 
- * @param {number}               [employee_dept_id]   - 
+ * @param {string}               [user_status_id]     - 
+ * @param {string}               [user_type_id]       - 
+ * @param {number}               [user_dept_id]       - 
  * @param {boolean}              is_admin             - 
  * @param {number}               [role_id]            - 
  * @param {boolean}              [deleted_flag]       - 
@@ -35,15 +35,15 @@ const {
  * @param {string}               [create_by]          - 
  * @param {string}               mod_date             - 
  * @param {string}               [mod_by]             - 
- * @param {number}               [employee_profile_id] - 
+ * @param {number}               [user_profile_id]    - 
  */
-class Employee extends Model {
+class User extends Model {
     static get tableName() {
-        return 'emp.employee';
+        return 'emp.user';
     }
 
     static get idColumn() {
-        return 'employee_id';
+        return 'user_id';
     }
 
     static get relationMappings() {
@@ -52,20 +52,20 @@ class Employee extends Model {
 
     static get jsonSchema() {
         return {
-            title: 'employee',
+            title: 'user',
             description: null,
             type: 'object',
             additionalProperties: false,
             properties: {
-                employee_code: {
+                user_code: {
                     type: 'string',
                     maxLength: 50
                 },
-                employee_name: {
+                user_name: {
                     type: 'string',
                     maxLength: 64
                 },
-                employee_password: {
+                user_password: {
                     type: 'string',
                     maxLength: 200
                 },
@@ -109,15 +109,15 @@ class Employee extends Model {
                     type: 'string',
                     maxLength: 200
                 },
-                employee_status_id: {
+                user_status_id: {
                     type: 'string',
                     maxLength: 2
                 },
-                employee_type_id: {
+                user_type_id: {
                     type: 'string',
                     maxLength: 2
                 },
-                employee_dept_id: {
+                user_dept_id: {
                     type: 'integer',
                     minimum: -9223372036854776000,
                     maximum: 9223372036854776000
@@ -168,7 +168,7 @@ class Employee extends Model {
                     type: 'string',
                     maxLength: 45
                 },
-                employee_profile_id: {
+                user_profile_id: {
                     type: 'integer',
                     minimum: -9223372036854776000,
                     maximum: 9223372036854776000
@@ -179,4 +179,4 @@ class Employee extends Model {
     }
 }
 
-module.exports = Employee;
+module.exports = User;
